@@ -1810,7 +1810,7 @@ textarea.form-input::-webkit-resizer { display: none; }
    */
 
   main {
-    max-width: 1200px;
+    max-width: 1600;
     margin-inline: auto;
     display: flex;
     justify-content: center;
@@ -1819,7 +1819,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .main-content {
-    min-width: 75%;
+    min-width: 100%;
     width: 10%;
     margin: 0;
   }
