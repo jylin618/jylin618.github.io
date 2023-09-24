@@ -1820,7 +1820,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .main-content {
     min-width: 100%;
-    width: 10%;
+    width: 200%;
     margin: 0;
   }
 
