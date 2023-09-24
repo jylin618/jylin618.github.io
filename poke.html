@@ -1,3 +1,12 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>HTML5 FUN</title>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+  <meta name="viewport" content="initial-scale=1.0,minimum-scale=1,maximum-scale=1.0,user-scalable=no">
+</head>  
+<body>
+
 <script charset="utf-8" id="settingJS" type="text/javascript">
 //=======================================================
 // HTML5 FUN 題庫設定檔 poke 戳戳樂
@@ -148,3 +157,21 @@ if(metaReferrer==null) {
 }
 metaReferrer.content = "no-referrer";
 </script>
+<script type="text/javascript" charset="utf-8" id="injectionJS" src="https://gsyan888.github.io/html5_fun/html5_fun_embeded.js" autostart="false" modulename="poke"></script>
+
+
+
+<script id="closeAppFunctionJS">
+try {
+console.log('is in iFrame: '+isInIFrame);
+}catch(error) { };
+
+if(typeof(isInIFrame)!='undefined' && isInIFrame) {
+  closeApp = function(e) {
+    window.close();
+  };
+}
+</script>
+
+</body>
+</html>
