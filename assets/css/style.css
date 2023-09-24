@@ -1240,7 +1240,7 @@ textarea.form-input::-webkit-resizer { display: none; }
  * responsive larger than 450px screen
  */
 
-@media (min-width: 450px) {
+@media (min-width: 1700px) {
 
   /**
    * client
@@ -1267,7 +1267,7 @@ textarea.form-input::-webkit-resizer { display: none; }
  * responsive larger than 580px screen
  */
 
-@media (min-width: 580px) {
+@media (min-width: 1700px) {
 
   /**
    * CUSTOM PROPERTY
@@ -1556,7 +1556,7 @@ textarea.form-input::-webkit-resizer { display: none; }
  * responsive larger than 768px screen
  */
 
-@media (min-width: 768px) {
+@media (min-width: 1700px) {
 
   /**
    * REUSED STYLE
@@ -1771,7 +1771,7 @@ textarea.form-input::-webkit-resizer { display: none; }
  * responsive larger than 1250px screen
  */
 
-@media (min-width: 1250px) {
+@media (min-width: 1700px) {
 
   /**
    * RESET
