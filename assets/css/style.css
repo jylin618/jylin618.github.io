@@ -1694,7 +1694,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   main { margin-bottom: 60px; }
 
   .main-content {
-    position: relative;
+    /* position: relative; */
     min-width: 1700px;
     margin: auto;
   }
@@ -1819,7 +1819,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .main-content {
-    min-width: 75%;
+    min-width: 1700px;
     width: 10%;
     margin: 0;
   }
