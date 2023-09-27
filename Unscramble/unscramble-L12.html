@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>HTML5 FUN</title>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+  <meta name="viewport" content="initial-scale=1.0,minimum-scale=1,maximum-scale=1.0,user-scalable=no">
+</head>  
+<body>
+
+<script charset="utf-8" id="settingJS" type="text/javascript">
+//=======================================================
+// HTML5 FUN 題庫設定檔 UNSCRAMBLE
+//=======================================================
+
+//-------------------------------
+//是否隨機出題
+// true: 隨選題目  false: 按題庫順序出題
+//-------------------------------
+select_questions_in_random = true;
+
+//-------------------------------
+//隨機出題時, 由題庫選出幾題來作答
+//  最多出幾題, 小於 0 就使用所有題目
+//-------------------------------
+number_of_questions = -1;
+
+//-------------------------------
+//字卡交換方式
+//  0 : drag & drop    
+//  1 : click
+//-------------------------------
+card_swap_mode = 1;
+
+//-------------------------------
+//是否使用「送出答案」的按鈕
+//  true : 玩家按「送出答案」才核對答案
+//  false : 卡片換位置後就自動對答案
+//-------------------------------
+enableSubmitButton = true;
+
+//---------------------------------------------------
+// [遊戲開始前的說明對話框設定]
+//---------------------------------------------------
+
+//-------------------------------
+//說明對話框標題
+//-------------------------------
+help_title = '說明';	
+
+//-------------------------------
+//說明對話框說明內容
+//-------------------------------
+help_description = '請排出正確的答案。加油！';
+
+//-------------------------------
+//說明對話框按鈕上的文字
+//-------------------------------
+help_button_caption = '開始';
+
+
+//---------------------------------------------------
+// [音效控制]
+//---------------------------------------------------
+
+//-------------------------------
+//是否播放語音
+//-------------------------------
+sound_enabled = true;
+
+//-------------------------------
+//是否自動播放語音 
+//  true : 自動播放 / false : 按播放鈕才播放
+//-------------------------------
+sound_autoPlay = true;
+
+//-------------------------------
+//語音自動重播的次數
+//-------------------------------
+sound_autoPlayLoop = 1;
+
+//-------------------------------
+//語音自動重播,隔多久重播(單位秒)
+//-------------------------------
+sound_autoPlayDelay = 2;
+
+//-------------------------------
+//是否使用 TTS 的語音
+//-------------------------------
+tts_enabled = true;
+
+//-------------------------------
+//將題庫中的哪一個欄位的文字轉語音(由 0 起算)
+//(如果有在第二欄以後指定聲音檔, 此參數就無效)
+//-------------------------------
+tts_is_at_index = 0;
+
+//-------------------------------
+//Google TTS 文字轉語音的設定
+//-------------------------------
+
+//----------
+//TTS 語言代碼(英文: 'en-US' , 中文: 'zh-TW')
+//----------
+tts_language = 'zh-TW';
+
+//----------
+//TTS 語音的速度 0 ~ 1 (可用小數)
+//----------
+tts_speed = 0.3; 
+
+//-------------------------------
+//組合成 TTS 網址，非必要不動
+//-------------------------------
+tts_base_url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl='+tts_language+'&client=tw-ob&ttsspeed='+tts_speed+'&q=';
+
+
+//---------------------------------------------------
+// [題庫設定]
+//---------------------------------------------------
+
+//-------------------------------
+//是否以字串長度來切割子字串,
+//	如果設為 true, 題庫第一欄位會以長度來切割
+//	如果設為 false (預設值), 題庫第一欄位會以 split_seperator 來切割
+//-------------------------------
+split_by_length = false;
+
+//-------------------------------
+//子字串多長(一張卡片幾個字)
+//  當 split_by_length 為 true 時才有效 
+//-------------------------------
+split_by_length_substring_length = 1;	
+
+
+//-------------------------------
+//題庫分割符號設定
+//-------------------------------
+//先以 data_seperator 分為多欄
+//再以 split_seperator 分割第一欄的長句
+
+//----------
+//欄位分隔符號
+//----------
+data_seperator = "##";	
+
+//----------
+//句子分割符號
+//
+//  以此符號將題目的句子切割為子字串當重組的字卡
+//  (split_by_length 為 false 時才有效)
+//----------
+split_seperator = ' ';	
+
+///-------------------------------
+// 本範例中，單字間用空白來切割；
+// 前七題用 Google TTS 發音
+// 後三題指定了第二個欄位，使用 mp3 目錄中的語音檔
+//-------------------------------
+
+//
+// [題庫]
+//
+// 一行一題, 
+//
+// 每一行由欄位分隔符號分為兩個欄位
+//
+// 第一欄為題目句子(可再利用符號或長度來分割)
+//
+// 第 2, 3, 4欄以後可指定使用以三種素材(也可不使用)
+//   * 文字(例如英文題目的中譯)
+//   * 音檔路徑
+//   * 圖檔路徑
+//
+// 本範例以 [空格] 來切割句子為字詞卡
+//
+questionLines = function(){/*--這一行請勿更改--
+医生说 我们 得 少喝 可乐 多喝 水
+这杯 奶茶 太甜了， 一点 都 不好喝
+这家 饭馆 的菜 她 一点儿 都 不喜欢
+这位 很辣的 女孩 是 我的 女朋友
+他 去了 商店， 可是 一点儿 东西 也 没买
+学生 餐厅 有 一位 上海 来的 师傅
+这盘 凉拌 黄瓜 吃起来 酸酸 甜甜的， 好吃 极了
+王朋 坐错 车了， 所以 没来 中文课
+糟糕，我 忘了 带 饭卡
+票 买好了， 我们 进去 看 电影
+我 刚 洗完 澡， 舒服 极了
+上 中文课 得 多说 中文 少说 英文
+这家 饭馆的 红烧 牛肉 很好吃， 常常 八点 不到 就 卖完了
+衣服 我 帮你 买好了， 明天 晚会 就可以 穿了
+除了 哥哥 以外，我们 都 吃 素
+明天的 中文 考试 你 准备 好了 吗？
+小花 刚才 打电话 给我 说 她 不能 来 学校
+我 吃了 十五个 饺子， 一碗 米饭， 还 吃了 一盘 糖醋鱼
+爸爸 跟 妈妈说 做菜 的时候 别放 味精 少放 盐
+除了 中文 以外， 我 还 会 说 英文 和 日文
+
+-----*/}.toString().replace(/\r/g,"").slice("function(){/*--這一行請勿更改--".length+1,-9);
+
+//
+//
+//
+//=======================================================
+//以下為執行程式,不需要修改
+//=======================================================
+//將題庫先進行 HTML 解碼, 標點符號才不會變 &#???;
+decodeHTML = function(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+};
+//將指定清單中的變都先進行 HTML 解碼(文字型態的才需要)
+var decodeList = ['select_questions_in_random', 'number_of_questions', 'card_swap_mode', 'enableSubmitButton', 'help_description', 'sound_enabled', 'sound_autoPlay', 'sound_autoPlayLoop', 'sound_autoPlayDelay', 'tts_enabled', 'tts_is_at_index', 'tts_language', 'tts_speed', 'split_by_length', 'split_by_length_substring_length', 'split_seperator', 'questionLines'];
+for(var nIndex=0; nIndex<decodeList.length; nIndex++) {
+  var varName = decodeList[nIndex];
+  if(typeof(window[varName])=='string') {
+    window[varName] = decodeHTML(window[varName]);
+  }
+}  
+/* 
+ <meta name="referrer" content="no-referrer" /> 
+*/
+var metaReferrer = null;
+var meta = document.getElementsByTagName('meta');
+for(var nIndex=0; nIndex<meta.length; nIndex++) { 
+  if(meta[nIndex].name=="referrer") {
+    metaReferrer = meta[nIndex];
+    break;
+  };
+}
+if(metaReferrer==null) {
+  metaReferrer = document.createElement('meta');
+  metaReferrer.name = "referrer";
+  document.getElementsByTagName('head')[0].appendChild(metaReferrer);
+}
+metaReferrer.content = "no-referrer";
+</script>
+<script type="text/javascript" charset="utf-8" id="injectionJS" src="https://gsyan888.github.io/html5_fun/html5_fun_embeded.js" autostart="false" modulename="unscramble"></script>
+
+
+
+<script id="closeAppFunctionJS">
+try {
+console.log('is in iFrame: '+isInIFrame);
+}catch(error) { };
+
+if(typeof(isInIFrame)!='undefined' && isInIFrame) {
+  closeApp = function(e) {
+    window.close();
+  };
+}
+</script>
+
+</body>
+</html>
